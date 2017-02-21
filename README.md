@@ -39,7 +39,7 @@ Parameters: See document online for parameters to be passed into string query
 # Game Play
 
 ## Game Rules
-### Play against the computer 
+- The player plays against the computer 
 - The computer choses a word
 - If the player does not guess correctly under 6 tries, the computer wins
 - On each try, player can guess either a letter or a word
@@ -72,4 +72,10 @@ Ranks players based on number of correctly solved words average time to solve ch
 
 Waffle.io was also used as a project management tool to keep track of requirements, bugs, and other issues
 
+# Challenges
+- Getting user input
+
+# Reflection
+This program may have been easily implemented in another language like Ruby or Python, since those
+languages facilitate user input. Since the Ruby and Python's processes would have been more synchronous in natutre, I would have written less lines of code, because a lot of the additional helper functions that were created just to process the user input would not have been necessary.
 
