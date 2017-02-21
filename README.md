@@ -1,8 +1,9 @@
 # Hangman
-This is a command line version of the popular game Hangman, built with NodeJS. 
+This is a command line version of the popular game Hangman, built with NodeJS. Initially, I wanted to create a Web Application that would allow me to utilize JavaScript/Nodejs, Databases, and Sockets. I however experienced some issues with working with the asynchronous nature of node, and ensuring the receipt of data before moving on to the next step of the game loop. In the interest of time with respect to the deadline of the project, I switched to working on this Command Line Application, with the hopes of debugging and completing the web app at a later date.
 
-Play game online at:
-https://hangman-extreme.herokuapp.com/
+
+### Web App version
+An web app game is currently in development, and can be forked or cloned from [github](https://github.com/tgreenidge/Hangman) or played [online](https://hangman-extreme.herokuapp.com/).
 
 # Instructions to get app running on local machine
 
@@ -42,6 +43,8 @@ Parameters: see document for online parameters
 - The computer choses a word
 - If the player does not guess correctly under 6 tries, the computer wins
 - On each try, player can guess either a letter or a word
+- On each try, if the answer is incorrect, an actual hangman diagram is displayed as it gets filled
+ 
 
 ### Guesses
 If player tries to solve the answer by guessing the word:
@@ -50,8 +53,7 @@ If player tries to solve the answer by guessing the word:
 
 If player tries to solve the answer by guessing one letter at a time:
   - Correct letters in the answer are revealed in their correct positions
-  - Incorrect letter guesses are displayed under "Incorrect Guesses on page"
-
+  - Incorrect letter guesses are displayed
 
 ### Word Lengths 
 - The words are of 4 to 8 letters only
@@ -61,7 +63,6 @@ Ranks players based on number of correctly solved words average time to solve ch
 
 
 # Process
- I wanted to create features that allow me to utilize JavaScript/Nodejs, Databases, and Sockets. I intially started working on pieces of the requirements that were to be
 
  1. Creation of basic game play functions, with tests on UI to ensure required components were displayed
  2. Creation of a dictionary
@@ -76,7 +77,6 @@ Ranks players based on number of correctly solved words average time to solve ch
 # Techology Stack
 - Node.js
 - Github
-- Heroku
 
 Waffle.io was also used as a project management tool to keep track of requirements, bugs, and other issues
 
