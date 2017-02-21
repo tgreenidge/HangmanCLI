@@ -1,0 +1,8 @@
+/*/*/.DS_STore
+
+# Node Modules
+node_modules/
+
+npm-debug.log
+
+/*.env

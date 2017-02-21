@@ -1,0 +1,23 @@
+{
+  "name": "hangman_cli",
+  "version": "1.0.0",
+  "description": "A command line version of the popular hangman game",
+  "main": "hangmanGame.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tgreenidge/HangmanCLI.git"
+  },
+  "author": "Tisha Greenidge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tgreenidge/HangmanCLI/issues"
+  },
+  "homepage": "https://github.com/tgreenidge/HangmanCLI#readme",
+  "dependencies": {
+    "jsonfile": "^2.4.0",
+    "request": "^2.79.0"
+  }
+}
