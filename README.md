@@ -1,5 +1,5 @@
-# Hangman
-This is a command line version of the popular game Hangman, built with NodeJS. Initially, I wanted to create a Web Application that would allow me to utilize JavaScript/Nodejs, Databases, and Sockets. I however experienced some issues with working with the asynchronous nature of node, and ensuring the receipt of data before moving on to the next step of the game loop. In the interest of time with respect to the deadline of the project, I switched to working on this Command Line Application, with the hopes of debugging and completing the web app at a later date.
+# HangmanCLI
+This is a command line version of the popular game Hangman, built with NodeJS. Initially, I wanted to create a Web Application that would allow me to utilize JavaScript/Nodejs, Databases, and Sockets. I however experienced some issues with working with the asynchronous nature of node, with respect to ensuring the receipt of data before moving on to the next step of the game loop. In the interest of time with respect to the deadline of the project, I switched to working on this Command Line Application, with hopes of debugging and completing the web app at a later time.
 
 
 ### Web App version
@@ -23,11 +23,11 @@ An web app game is currently in development, and can be forked or cloned from [g
 
 #### Instructions to create  a different list of words that is found in the dictionaryWords.js file
    
-Manipulate the parameters for the API to select your preferences
+1. Manipulate the parameters for the API to select your preferences
  
 API: http://linkedin-reach.hagbpyjegb.us-west-2.elasticbeanstalk.com/words
  
-Parameters: see document for online parameters
+Parameters: See document online for parameters to be passed into string query
 
 - From the root folder of the project, type the following in the command line:
 
@@ -62,17 +62,9 @@ If player tries to solve the answer by guessing one letter at a time:
 Ranks players based on number of correctly solved words average time to solve challenges.
 
 
-# Process
+# Game Work Flow
 
- 1. Creation of basic game play functions, with tests on UI to ensure required components were displayed
- 2. Creation of a dictionary
- 3. Initial mock up of UI to test game play functionality when a game option was chosen
- 4. Develop/Test Game object and methods
- 5. Develop/Test Player object
- 6. Integrate Game/Player functionality
- 7. Integrate Game/Player Functionality with UI
- 8. Add user database
- 9. Display LeaderBoard
+  * Place Image Here
 
 # Techology Stack
 - Node.js
