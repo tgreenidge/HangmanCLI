@@ -1,13 +1,26 @@
 # HangmanCLI
-This is a command line version of the popular game Hangman, built with NodeJS. Initially, I wanted to create a Web Application that would allow me to utilize JavaScript/Nodejs, Databases, and Sockets. I however experienced some issues with working with the asynchronous nature of node, with respect to ensuring the receipt of data before moving on to the next step of the game loop. In the interest of time with respect to the deadline of the project, I switched to working on this Command Line Application, with hopes of debugging and completing the web app at a later time.
+This repo contains 2 command line versions of the popular game Hangman- one built in Python, the other built with NodeJS(in development). 
+
+Initially, I wanted to create a Web Application that would allow me to utilize JavaScript/Nodejs, Databases, and Sockets. I however experienced some issues with working with the asynchronous nature of node, with respect to ensuring the receipt of data before moving on to the next step of the game loop. Unfortunately I experienced set backs in the Nodejs Command Line App as well becuase of the work arounds I had to implement for use input the command line. These setbacks prevented the necessary testing of the fuctions created so that I can move from from step to the next.
+
+In the interest of time with respect to the deadline of the project, I switched to working on this Command Line Application, with hopes of debugging and completing the other 2 Nodejs apps at a later time.
 
 
 ### Web App version
 An web app game is currently in development, and can be forked or cloned from [github](https://github.com/tgreenidge/Hangman) or played [online](https://hangman-extreme.herokuapp.com/).
 
-# Instructions to get app running on local machine
 
+# The instructions below are for getting started on the PYTHON Command Line Game
+- Install python
 - Clone project or fork from this repository
+
+# Instructions to get app running on local machine
+- Navigate to project root folder (HangmanCLI/) in the command line
+- Enter the following in the command line:
+  ``` python hangmanGame.py ```
+
+
+#### Instructions to create  a different list of words that is found in the dictionaryWords.js file
 - Install [nodejs](https://nodejs.org/en/)
 - Install [npm](http://blog.npmjs.org/post/85484771375/how-to-install-npm)
 - Install game dependencies
@@ -16,12 +29,6 @@ An web app game is currently in development, and can be forked or cloned from [g
 
  ```npm install```
 
-- Start the node server from the root folder:
-  
-  ```node hangmanGame```
-
-
-#### Instructions to create  a different list of words that is found in the dictionaryWords.js file
    
 1. Manipulate the parameters for the API to select your preferences
  
@@ -31,9 +38,9 @@ Parameters: See document online for parameters to be passed into string query
 
 - From the root folder of the project, type the following in the command line:
 
-``` node dictionary.js ```
+``` node createDictionary.js ```
 
-- This will replace the file in the **dictionary** folder called **dictionaryWords.js**
+- This will replace the file called **dictionaryWords.json** in the **dictionary** folder 
 
 
 # Game Play
@@ -55,27 +62,88 @@ If player tries to solve the answer by guessing one letter at a time:
   - Correct letters in the answer are revealed in their correct positions
   - Incorrect letter guesses are displayed
 
-### Word Lengths 
-- The words are of 4 to 8 letters only
-
-## Leader Board
-Ranks players based on number of correctly solved words average time to solve challenges.
+### Dictionary Words and difficulty 
+- The words are of 4 to 8 letters only, and of difficulty levels 1 & 2 based on the API standsards
 
 
-# Game Work Flow
+# Current Game Work Flow
 
-  * Place Image Here
+  Create new player
+          \/
+  Create new game
+          \/
+  Start new game
+  
+  *** GAME PLAY ****
+  Access dictionary to obtain random, secret word, and display word length to user as blanks
+          \/
+
+  *** Loop Below until win or lose ***
+  
+  Display Current Game Statistics to the User
+          \/
+  Prompt user to declare expected input type (letter or word)
+          \/
+  Validate user input 
+          \/
+  Prompt user for input 
+          \/
+  Validate User input (input should match the declared input type)
+          \/
+  Process Input to determine win or loss
+          \/
+  Game Ends when there was a win/loss
+
+
+  *** Design ***
+  Object Oriented programming was used, where a game has only one player
+
+  *** TESTING ***
+  No formal testing framework was used, but tests were carried out for different input situations,
+  at each stage of the game development to ensure currect output was expect. Tests conducted included:
+  
+  - Correct progression of hangman display the game progressed through the loop
+  - 'L' for letter, 'W' for word is entered to declare input type
+  - Input that are not all letters are rejected
+  - Words had more than one charater; letters have only one character
+  - All methods when called produced satisfatory output
+  - Combinations of letters/words were used and produced correct output
+
+# Example Output
+
+**Example 1**
+![Hangman 1]('./images/Hangman1.png' "Sample output")
+
+**Example 2**
+![Hangman 2]('./images/Hangman1.png' "Sample output")
+
+**Example 3**
+![Hangman 3]('./images/Hangman1.png' "Sample output")
+
 
 # Techology Stack
-- Node.js
-- Github
+- Python -  Game play
+- Node.js - To create JSON file from API
+- Github 
+
 
 Waffle.io was also used as a project management tool to keep track of requirements, bugs, and other issues
 
-# Challenges
-- Getting user input
+# Future plans for version 2.0
 
-# Reflection
-This program may have been easily implemented in another language like Ruby or Python, since those
-languages facilitate user input. Since the Ruby and Python's processes would have been more synchronous in natutre, I would have written less lines of code, because a lot of the additional helper functions that were created just to process the user input would not have been necessary.
+- Create data structure to store registered users (and winning information)
+- Create Leader Board that ranks players based on number of their winning games. Ties would be resolved by ranking players who reached the respective number of games won at an earlier date higher than others. This version of the game prepares for this by capturing player's total number of games won and time of winning at the end of a winning game
+
+
+#### ** To run/ contibute to the Nodejs Command Line App*** 
+
+Once node and npm are installed. In the root folder, 
+
+- Download dependencies
+
+ ```npm install```
+
+- Start the node server from the root folder:
+  
+  ```node hangmanGame```
 
