@@ -1,6 +1,9 @@
-import json
-from random import randint
-import re
+import json #json module
+import re #regular expression module
+import sys
+from random import randint #to genenerate random number
+from datetime import datetime #to generate time
+
 
 #Create dictionary of Words
 with open('./dictionary/dictionaryWords.json') as json_data:
@@ -14,6 +17,7 @@ class Player():
   def __init__(self, user_name):
     self.user_name = user_name
     self.num_of_wins = 0
+    self.time_of_last_win = None
 
 
 ############################# Hangman Game ##################################
@@ -25,17 +29,11 @@ class HangmanGame():
   def start_game(self):
     guess_remaining = self.max_guesses
     random_num = randint(0, dict_length)
-    secret_word = dictionary[random_num]
-    incorrect_letters = []
+    self.secret_word = dictionary[random_num].upper()
+    self.incorrect_letters_array = []
+    self.incorrect_words_array = []
 
-    #fix this
-    letters_guessed_array = []
-
-    #fix this
-    #letters_guessed = ','.join(letters_guessed_array)
-
-    
-    letters_guessed = self.get_blanks(len(secret_word))
+    self.letters_guessed_array = self.get_blanks().split(' ')
     
     #flag for input type(letter or word)
     self.this_input_type_is_letter = False
@@ -43,17 +41,24 @@ class HangmanGame():
     is_input_valid = False
 
     self.this_user_guess_response = None
+    num_guesses_so_far = 0
+    num_correct_guesses_so_far = 0;
 
     #while you have less than 6 incorrect letters
-    while guess_remaining - len(incorrect_letters) > 0:
+    while guess_remaining > 0:
       #REMOVE ME!!
-      print(secret_word)
-
+      print(self.secret_word)
+      
+      
+      print("\n******************************************\n")
       #print hangman status
-      self.fill_man(len(letters_guessed_array))
-
+      self.fill_man(num_guesses_so_far)
+      letters_guessed = ' '.join(map(str, self.letters_guessed_array))
+      incorrect_letters_guessed = ', '.join(map(str, self.incorrect_letters_array))
+      incorrect_words_guessed  = ', '.join(map(str, self.incorrect_words_array))
       #print current game stats
-      self.print_game_stats(guess_remaining, secret_word, letters_guessed, incorrect_letters)
+      self.print_game_stats(guess_remaining, letters_guessed, incorrect_letters_guessed, 
+                            incorrect_words_guessed)
 
       #prompt user for choice of input type and validify input
       while not is_input_valid:
@@ -66,8 +71,7 @@ class HangmanGame():
       #reset is_input valid for the next validity test 
       is_input_valid = False
 
-      #test
-      print("Here", self.this_input_type_is_letter)
+      #simple formatting for output
       if self.this_input_type_is_letter:
         input_type = "letter"
       else:
@@ -83,36 +87,84 @@ class HangmanGame():
         #validate input matches input type (false means we want to test if input a valid word/letter)
         is_input_valid = self.is_letter_or_word_valid(letter_or_word_guess.strip().upper(), False)
 
-      print(" Your input is valid")
+      #if input is word, test word to see if it matches secret word
+      if not self.this_input_type_is_letter:
+        if self.this_user_guess_response == self.secret_word:
+          self.user_wins_game()
+          # brake or end game?
+        else:
+          # incorrect response. Since this is a word add to incorrect words array
+          print("You entered an incorrect word")
+          self.incorrect_words_array.append(self.this_user_guess_response)
+      else:
+        #input is a letter
+        #Check to see how many of letters are in the word
+        indices_of_letter = self.get_indices_of_letter_in_word()
 
+        #update correct letters guessed so far to determine win
+        num_correct_guesses_so_far += len(indices_of_letter)
 
+        
+        if(len(indices_of_letter)): 
+          #change dashes to letters for correct letter guessed
+          self.change_dashes_to_letters(indices_of_letter)
+        else:
+          #add letter to incorrect guessed letters arrayr
+          self.incorrect_letters_array.append(self.this_user_guess_response)
+
+      #test to see if user wins game
+      if num_correct_guesses_so_far == len(self.secret_word):
+        self.user_wins_game()
+      #need to reset input type and response for next iteration
+      is_input_valid = False
+      self.this_input_type_is_letter = False
+      self.this_user_guess_response = None
       guess_remaining -= 1
+      num_guesses_so_far += 1
+
+  #This method gets all instances of position of letter guessed in secret word
+  def get_indices_of_letter_in_word(self):
+    letter_indices = []
+
+    for i, ltr in enumerate(self.secret_word):
+      if ltr == self.this_user_guess_response:
+        letter_indices.append(i)
+
+    return letter_indices
+
+
+  #Replaces dashes to letters of respective index and returns string with indices and dashes
+  def change_dashes_to_letters(self, indices):
+    for i in indices:
+        self.letters_guessed_array[i] = self.this_user_guess_response
+
 
   #This method prints dashes on start of game. The dashes represent the number of letters in secret word
-  def get_blanks(self, word_length):
-    dashes = "";
+  def get_blanks(self):
 
-    for i in range(word_length):
-      if i == word_length:
-        dashes += '_'
+    dashes = ""
+    for i in range(len(self.secret_word)):
+      if i == len(self.secret_word) - 1:
+        dashes += "_";
       else:
-        dashes += '_' + ' '
-
-    return dashes
+        dashes += "_" + " "
+  
+    return dashes;
 
   #This method prints the game statistics
-  def print_game_stats(self, guesses_rem, word, letters_guessed, incorr_lets):
+  def print_game_stats(self, guesses_rem, letters_guessed, incorr_lets, incorr_words):
     print("\n******************************************\n")
     print("{}, you have {} guesses remaining.\n".format(self.player.user_name, guesses_rem))
-    print("Your Secret Word has {} letters.\n".format(len(word)))
+    print("Your Secret Word has {} letters.\n".format(len(self.secret_word)))
     print("This is what you need to finish solve: \n\n{}".format(letters_guessed))
-    print("\nThese are the letters that you guessed incorrectly: {}\n".format(','.join(incorr_lets)))
+    print("\nThese are the letters that you guessed incorrectly: {}\n".format(incorr_lets))
+    print("\nThese are the words that you guessed incorrectly: {}\n".format(incorr_words))
 
-  #This method will be used to print fill in the hangman status
+  #This method will be used to print fill in the body parts of the hangman diagram
   def fill_man(self, numTries):
-    body_parts = ["-----\n     |", "     O ", "    - -", "     | ", "    / \\"]
+    body_parts = ["-----", "     |", "     O ", "    - -", "     | ", "    / \\"]
     
-    for ind in range(numTries -1 ):
+    for ind in range(numTries):
       print(body_parts[ind])
   
 
@@ -152,11 +204,16 @@ class HangmanGame():
           #string entered is a word, but we are expecting a letter
           return False
 
-
-
+  def user_wins_game(self):
+    print("YooHoo! you won! The correct word was '{}'".format("".join(self.letters_guessed_array)))
+    #update user stats for database
+    self.player.num_of_wins += 1
+    self.player.time_of_last_win = datetime.now()
+    #add user to list of winners
+    self.end_game()
 
   def end_game(self):
-    pass
+    sys.exit()
 
 
 
@@ -169,7 +226,7 @@ class HangmanGame():
 
 
 player1 = Player("tisha")
-print(player1.user_name)
+
 tishagame = HangmanGame(player1)
 
 tishagame.start_game()
