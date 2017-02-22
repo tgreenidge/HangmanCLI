@@ -138,13 +138,13 @@ If player tries to solve the answer by guessing one letter at a time:
 
 **Example 2**
 
-![Hangman 2](./images/Hangman1.png "Sample output")
+![Hangman 2](./images/Hangman2.png "Sample output")
 
 
 
 **Example 3**
 
-![Hangman 3](./images/Hangman1.png "Sample output")
+![Hangman 3](./images/Hangman3.png "Sample output")
 
 
 # Techology Stack
