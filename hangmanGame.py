@@ -90,6 +90,7 @@ class HangmanGame():
       #if input is word, test word to see if it matches secret word
       if not self.this_input_type_is_letter:
         if self.this_user_guess_response == self.secret_word:
+          self.letters_guessed_array = self.secret_word.split(" ")
           self.user_wins_game()
           # brake or end game?
         else:
