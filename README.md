@@ -18,7 +18,7 @@ An web app game is currently in development, and can be forked or cloned from [g
   ``` python hangmanGame.py ```
 
 
-## Instructions to create  a different list of words that is found in the dictionaryWords.js file
+## Instructions to create a different list of words that is found in the dictionaryWords.js file
 - Install [nodejs](https://nodejs.org/en/)
 - Install [npm](http://blog.npmjs.org/post/85484771375/how-to-install-npm)
 - Install game dependencies
@@ -78,13 +78,13 @@ If player tries to solve the answer by guessing one letter at a time:
   Start new game
   
   
-  *** GAME PLAY ****
+  ** GAME PLAY **
   
   Access dictionary to obtain random, secret word, and display word length to user as blanks
   
           \/
 
-  *** Loop Below until win or lose ***
+  ** Loop Below until win or lose **
   
   Display Current Game Statistics to the User
   
@@ -113,11 +113,11 @@ If player tries to solve the answer by guessing one letter at a time:
   Game Ends when there was a win/loss
 
 
-  *** Design ***
+  ** Design **
   
   Object Oriented programming was used, where a game has only one player
 
-  *** TESTING ***
+  ** TESTING **
   
   No formal testing framework was used, but tests were carried out for different input situations,
   at each stage of the game development to ensure currect output was expect. Tests conducted included:
