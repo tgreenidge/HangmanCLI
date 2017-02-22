@@ -132,12 +132,18 @@ If player tries to solve the answer by guessing one letter at a time:
 # Example Output
 
 **Example 1**
+
 ![Hangman 1](./images/Hangman1.png "Sample output")
 
+
 **Example 2**
+
 ![Hangman 2](./images/Hangman1.png "Sample output")
 
+
+
 **Example 3**
+
 ![Hangman 3](./images/Hangman1.png "Sample output")
 
 
