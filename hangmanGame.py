@@ -5,7 +5,7 @@ from random import randint #to genenerate random number
 from datetime import datetime #to generate time
 
 
-#Create dictionary of Words
+#Create dictionary of Words. 
 with open('./dictionary/dictionaryWords.json') as json_data:
     dictionary_words = json.load(json_data)
 
@@ -19,7 +19,6 @@ class Player():
     self.num_of_wins = 0
     self.time_of_last_win = None
 
-
 ############################# Hangman Game ##################################
 class HangmanGame():
   def __init__(self, player):
@@ -27,35 +26,51 @@ class HangmanGame():
     self.max_guesses = 6
 
   def start_game(self):
+    #number of guesses that the user has left for the game
     guess_remaining = self.max_guesses
     random_num = randint(0, dict_length)
+
+    #secret word for this instance of the game
     self.secret_word = dictionary[random_num].upper()
+
+    #keeps track of incorrect letters in the array
     self.incorrect_letters_array = []
+
+    #keeps track of incorrect words in the array
     self.incorrect_words_array = []
 
+    #An array of the letters that are correctly guessed, and their positions in the word
     self.letters_guessed_array = self.get_blanks().split(' ')
     
     #flag for input type(letter or word)
     self.this_input_type_is_letter = False
 
+    #keeps track of user's current word or letter response(guess)
+    self.this_user_guess_response = None
+
+    #used for testing the validity of a response so user can enter a correct response
     is_input_valid = False
 
-    self.this_user_guess_response = None
+    #keeps track of the guesses used so far to out correct hangmam picture
     num_guesses_so_far = 0
+
+    #keeps track of user guesses so far to easily determine if user won the game
     num_correct_guesses_so_far = 0;
 
     #while you have less than 6 incorrect letters
     while guess_remaining > 0:
-      #REMOVE ME!!
-      print(self.secret_word)
       
-      
+      #Improves readibility in command line
       print("\n******************************************\n")
+      
       #print hangman status
       self.fill_man(num_guesses_so_far)
+      
+      #Convert letters and word tracked in the array to strings for game statistics display
       letters_guessed = ' '.join(map(str, self.letters_guessed_array))
       incorrect_letters_guessed = ', '.join(map(str, self.incorrect_letters_array))
       incorrect_words_guessed  = ', '.join(map(str, self.incorrect_words_array))
+      
       #print current game stats
       self.print_game_stats(guess_remaining, letters_guessed, incorrect_letters_guessed, 
                             incorrect_words_guessed)
@@ -71,7 +86,7 @@ class HangmanGame():
       #reset is_input valid for the next validity test 
       is_input_valid = False
 
-      #simple formatting for output
+      #simple formatting for output message below
       if self.this_input_type_is_letter:
         input_type = "letter"
       else:
@@ -116,7 +131,8 @@ class HangmanGame():
       #test to see if user wins game
       if num_correct_guesses_so_far == len(self.secret_word):
         self.user_wins_game()
-      #need to reset input type and response for next iteration
+      
+      #need to reset the following for next iteration to ensure correct output
       is_input_valid = False
       self.this_input_type_is_letter = False
       self.this_user_guess_response = None
@@ -126,7 +142,6 @@ class HangmanGame():
     #game ends
     self.fill_man(num_guesses_so_far)
     self.user_loses_game()
-
 
 
   #This method gets all instances of position of letter guessed in secret word
@@ -211,36 +226,46 @@ class HangmanGame():
           #string entered is a word, but we are expecting a letter
           return False
 
+  #This method prints congratulatory message, updates winner info, and ends the game
   def user_wins_game(self):
     print("YooHoo! you won! The correct word was '{}'".format("".join(self.letters_guessed_array)))
-    #update user stats for database
+    #update user stats for database (future enhancement)
     self.player.num_of_wins += 1
     self.player.time_of_last_win = datetime.now()
     #add user to list of winners
     self.end_game()
 
+  #This method prints message that user lost, and ends the game
   def user_loses_game(self):
-
     print("Sorry! you lost! The correct word was '{}'".format(self.secret_word))
     self.end_game()
 
+  #This method ends the game
   def end_game(self):
     sys.exit()
 
 
+################################# Main program ################################################
 
-    
+def create_new_hangman_game():
+  print("Welcome. Try to beat the computer in this game of Hangman! You have 6 guesses.")
+  print("Guesses may be all letters, all words, or a combination of both.")
+  print("For example, you can guess a letter, then a word, then a word, ... etc")
+  print("Ok, let's get started")
 
-  
+  player_username = raw_input("Please enter a user_name").strip().upper()
 
+  #For future iteration, create data structure for registered users, and check to see if user exists
+  #before creating a new user
+  player = Player(player_username);
 
-    
+  #create a new instance of a game for this player
+  player_game = HangmanGame(player)
 
+  player_game.start_game()
 
-player1 = Player("tisha")
+##############################################################################################  
 
-tishagame = HangmanGame(player1)
-
-tishagame.start_game()
+create_new_hangman_game()
 
 
