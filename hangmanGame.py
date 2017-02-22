@@ -123,6 +123,12 @@ class HangmanGame():
       guess_remaining -= 1
       num_guesses_so_far += 1
 
+    #game ends
+    self.fill_man(num_guesses_so_far)
+    self.user_loses_game()
+
+
+
   #This method gets all instances of position of letter guessed in secret word
   def get_indices_of_letter_in_word(self):
     letter_indices = []
@@ -155,7 +161,7 @@ class HangmanGame():
   #This method prints the game statistics
   def print_game_stats(self, guesses_rem, letters_guessed, incorr_lets, incorr_words):
     print("\n******************************************\n")
-    print("{}, you have {} guesses remaining.\n".format(self.player.user_name, guesses_rem))
+    print("{}, this is the number of guesses remaining: {}.\n".format(self.player.user_name, guesses_rem))
     print("Your Secret Word has {} letters.\n".format(len(self.secret_word)))
     print("This is what you need to finish solve: \n\n{}".format(letters_guessed))
     print("\nThese are the letters that you guessed incorrectly: {}\n".format(incorr_lets))
@@ -211,6 +217,11 @@ class HangmanGame():
     self.player.num_of_wins += 1
     self.player.time_of_last_win = datetime.now()
     #add user to list of winners
+    self.end_game()
+
+  def user_loses_game(self):
+
+    print("Sorry! you lost! The correct word was '{}'".format(self.secret_word))
     self.end_game()
 
   def end_game(self):
