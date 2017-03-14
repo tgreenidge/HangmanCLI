@@ -1,10 +1,6 @@
 # HangmanCLI
 This repo contains a command line version of the popular game Hangman - built in Python.
 
-### Web App version
-An web app game is currently in development, and can be forked or cloned from [github](https://github.com/tgreenidge/Hangman) or played [online](https://hangman-extreme.herokuapp.com/).
-
-
 # The instructions below are for getting started on the PYTHON Command Line Game
 - Install python
 - Clone project or fork from this repository
