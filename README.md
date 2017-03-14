@@ -1,10 +1,5 @@
 # HangmanCLI
-This repo contains 2 command line versions of the popular game Hangman- one built in Python, the other built with NodeJS(in development). 
-
-Initially, I wanted to create a Web Application that would allow me to utilize JavaScript/Nodejs, Databases, and Sockets. I however experienced some issues with working with the asynchronous nature of node, with respect to ensuring the receipt of data before moving on to the next step of the game loop. Unfortunately I experienced set backs in the Nodejs Command Line App as well because of the work arounds I had to implement for use input the command line. These setbacks prevented the necessary testing of the functions created so that I can move from from step to the next.
-
-In the interest of time with respect to the deadline of the project, I switched to working on this Python Command Line Application, with hopes of debugging and completing the other 2 Nodejs apps at a later time.
-
+This repo contains a command line version of the popular game Hangman - built in Python.
 
 ### Web App version
 An web app game is currently in development, and can be forked or cloned from [github](https://github.com/tgreenidge/Hangman) or played [online](https://hangman-extreme.herokuapp.com/).
@@ -141,7 +136,6 @@ If player tries to solve the answer by guessing one letter at a time:
 ![Hangman 2](./images/Hangman2.png "Sample output")
 
 
-
 **Example 3**
 
 ![Hangman 3](./images/Hangman3.png "Sample output")
@@ -160,16 +154,4 @@ Waffle.io was also used as a project management tool to keep track of requiremen
 - Create data structure to store registered users (and winning information)
 - Create Leader Board that ranks players based on number of their winning games. Ties would be resolved by ranking players who reached the respective number of games won at an earlier date higher than others. This version of the game prepares for this by capturing player's total number of games won and time of winning at the end of a winning game
 
-
-# To run/ contibute to the Nodejs Command Line App
-
-Once node and npm are installed. In the root folder, 
-
-- Download dependencies
-
- ```npm install```
-
-- Start the node server from the root folder:
-  
-  ```node hangmanGame```
 
